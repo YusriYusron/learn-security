@@ -3,6 +3,7 @@ const rateLimit = require('express-rate-limit')
 const xss = require('xss-clean')
 const helmet = require('helmet')
 const brcypt = require('bcrypt') 
+const mongoSanitize = require('express-mongo-sanitize')
 
 const app = express()
 
@@ -34,3 +35,11 @@ brcypt.hash('mypassword',10, (error, hash) => {
          }
      })
 })
+
+/*
+    For SQL, you can visit this.
+    https://github.com/mysqljs/mysql#escaping-query-values
+*/
+
+//NoSQL Defender when using MongoDB
+app.use(mongoSanitize())
